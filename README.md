@@ -1,5 +1,6 @@
-# Description
+# Magento 2 Speculation Rules module
 
+### Description
 The [Speculation Rules API](https://github.com/WICG/nav-speculation/blob/main/triggers.md#speculation-rules) is a JSON-defined API developed by Google to enhance the performance of web page loading through speculative loading strategies.
 One more [description](https://developer.mozilla.org/en-US/docs/Web/API/Speculation_Rules_API) by Mozilla MSDN.
 
