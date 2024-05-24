@@ -1,0 +1,29 @@
+{
+    "name": "swissup/module-speculation-rules",
+    "description": "Swissup Speculation Rules Module",
+    "require": {
+        "php": "^7.4|^8.0|^8.1|^8.2|^8.3",
+        "magento/framework": "^102.0|^103.0"
+    },
+    "type": "magento2-module",
+    "version": "1.0.0",
+    "license": [
+        "MIT"
+    ],
+    "autoload": {
+        "files": [
+            "registration.php"
+        ],
+        "psr-4": {
+            "Swissup\\SpeculationRules\\": ""
+        }
+    },
+    "extra": {
+        "swissup": {
+            "links": {
+                "docs"     : "http://docs.swissuplabs.com/m2/extensions/speculation-rules/",
+                "changelog": "http://docs.swissuplabs.com/m2/extensions/speculation-rules/changelog/"
+            }
+        }
+    }
+}
