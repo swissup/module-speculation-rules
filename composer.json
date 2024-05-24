@@ -3,7 +3,8 @@
     "description": "Swissup Speculation Rules Module",
     "require": {
         "php": "^7.4|^8.0|^8.1|^8.2|^8.3",
-        "magento/framework": "^102.0|^103.0"
+        "magento/framework": "^102.0|^103.0",
+        "swissup/module-core": "^1.12.19"
     },
     "type": "magento2-module",
     "version": "1.0.0",
