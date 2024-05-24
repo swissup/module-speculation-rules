@@ -30,8 +30,8 @@ bin/magento setup:upgrade
 
 ```bash
 cd <magento_root>
-composer config repositories.swissup composer https://docs.swissuplabs.com/packages/
-composer require swissup/module-speculation-rules --prefer-source --ignore-platform-reqs
+composer config repositories.module-speculation-rules vcs git@github.com:swissup/module-speculation-rules.git
+composer require swissup/module-speculation-rules:dev-master --prefer-source --ignore-platform-reqs
 bin/magento module:enable Swissup_SpeculationRules Swissup_Core
 bin/magento setup:upgrade
 ```
