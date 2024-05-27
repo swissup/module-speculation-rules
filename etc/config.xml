@@ -9,10 +9,10 @@
         'source': 'document',
         'where': {
             'and': [
-                { "href_matches": "/*" },
-                {'not': {'selector_matches': [ '.action', '.skip-prerender']}},
-                { "not": {"selector_matches": "[rel~=nofollow]"}},
-                {'not': {'href_matches': [
+                { 'href_matches': '/*' },
+                { 'not': {'selector_matches': [ '.action', '.skip-prerender']}},
+                { 'not': {'selector_matches': '[rel~=nofollow]'}},
+                { 'not': {'href_matches': [
                     'checkout',
                     'customer',
                     'search',
