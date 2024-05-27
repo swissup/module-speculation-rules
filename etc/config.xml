@@ -1,0 +1,31 @@
+<config xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="urn:magento:module:Magento_Store:etc/config.xsd">
+    <default>
+        <swissup_speculationrules>
+            <main>
+                <enabled>1</enabled>
+                <rules><![CDATA[{
+    'prerender': [{
+        'source': 'document',
+        'where': {
+            'and': [
+                { "href_matches": "/*" },
+                {'not': {'selector_matches': [ '.action', '.skip-prerender']}},
+                { "not": {"selector_matches": "[rel~=nofollow]"}},
+                {'not': {'href_matches': [
+                    'checkout',
+                    'customer',
+                    'search',
+                    'catalogsearch',
+                    'product_compare',
+                    'wishlist'
+                ]}}
+            ]
+        },
+        'eagerness': 'moderate'
+    }]
+}]]></rules>
+            </main>
+        </swissup_speculationrules>
+    </default>
+</config>

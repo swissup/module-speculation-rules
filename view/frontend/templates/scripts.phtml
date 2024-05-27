@@ -1,0 +1,28 @@
+<?php
+/**
+ * @var \Magento\Framework\View\Element\Template $block
+ * @var \Magento\Framework\View\Helper\SecureHtmlRenderer $secureRenderer
+ * @var \Swissup\SpeculationRules\ViewModel\Config $viewModel
+ */
+
+$viewModel = $block->getData('viewModel');
+$speculationRules = $viewModel->getSpeculationRules();
+
+$script = <<<SCRIPT
+(function addSpeculationRules(scriptElement, _document) {
+    const isSupportSpeculationRules = scriptElement.supports && scriptElement.supports('speculationrules');
+    if (isSupportSpeculationRules) {
+        const speculationScript = _document.createElement('script');
+        speculationScript.type = 'speculationrules';
+        const speculationRules = {$speculationRules};
+        speculationScript.textContent = JSON.stringify(speculationRules);
+        _document.body.append(speculationScript);
+    }
+}(HTMLScriptElement, document));
+SCRIPT;
+?>
+<?php if (isset($secureRenderer)): ?>
+<?= /* @noEscape */ $secureRenderer->renderTag('script', ['type' => 'text/javascript'], $script, false) ?>
+<?php else: ?>
+<script type="text/javascript"><?= /* @noEscape */ $script ?></script>
+<?php endif; ?>
