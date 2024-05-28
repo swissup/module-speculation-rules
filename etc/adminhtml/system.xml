@@ -13,7 +13,7 @@
                     <source_model>Magento\Config\Model\Config\Source\Yesno</source_model>
                 </field>
                 <field id="rules" translate="label" type="textarea" sortOrder="30" showInDefault="1" showInWebsite="1" showInStore="1">
-                    <label>Speculations Rules</label>
+                    <label>Speculation Rules</label>
                     <comment><![CDATA[
                         <a href="https://github.com/WICG/nav-speculation/blob/main/triggers.md#speculation-rules" target="_blank">Speculation Rules API</a><br/>
                         <a href="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/script/type/speculationrules#syntax" target="_blank">Speculation Rules Syntax Docs</a>
