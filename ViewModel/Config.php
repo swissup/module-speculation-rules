@@ -15,10 +15,18 @@ class Config implements ArgumentInterface, ConfigInterface
      */
     private $scopeConfig;
 
+    /**
+     * @var \Magento\Csp\Helper\CspNonceProvider
+     */
+    private $cspNonceProvider;
+
     public function __construct(
-        \Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig
+        \Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig,
+        \Magento\Csp\Helper\CspNonceProvider $cspNonceProvider = null
     ) {
         $this->scopeConfig = $scopeConfig;
+        $this->cspNonceProvider = $cspNonceProvider ?: \Magento\Framework\App\ObjectManager::getInstance()
+            ->get(\Magento\Csp\Helper\CspNonceProvider::class);
     }
 
     /**
@@ -31,5 +39,14 @@ class Config implements ArgumentInterface, ConfigInterface
             self::CONFIG_XML_PATH_RULES,
             ScopeInterface::SCOPE_STORE
         );
+    }
+
+    /**
+     * @return string|null
+     * @throws \Magento\Framework\Exception\LocalizedException
+     */
+    public function getNonce()
+    {
+        return $this->cspNonceProvider ? $this->cspNonceProvider->generateNonce() : null;
     }
 }

@@ -7,6 +7,8 @@
 
 $viewModel = $block->getData('viewModel');
 $speculationRules = $viewModel->getSpeculationRules();
+$nonce = $viewModel->getNonce();
+$nonce = empty($nonce) ? '' : "speculationScript.setAttribute('nonce', '{$nonce}');";
 
 $script = <<<SCRIPT
 (function addSpeculationRules(scriptElement, _document) {
@@ -14,6 +16,7 @@ $script = <<<SCRIPT
     if (isSupportSpeculationRules) {
         const speculationScript = _document.createElement('script');
         speculationScript.type = 'speculationrules';
+        {$nonce}
         const speculationRules = {$speculationRules};
         speculationScript.textContent = JSON.stringify(speculationRules);
         _document.body.append(speculationScript);
