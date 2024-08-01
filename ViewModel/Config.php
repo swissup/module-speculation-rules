@@ -23,7 +23,7 @@ class Config implements ArgumentInterface, ConfigInterface
 
     public function __construct(
         \Magento\Framework\App\Config\ScopeConfigInterface $scopeConfig,
-        \Magento\Framework\ObjectManagerInterface $objectManager = null
+        \Magento\Framework\ObjectManagerInterface $objectManager
     ) {
         $this->scopeConfig = $scopeConfig;
         $className = \Magento\Csp\Helper\CspNonceProvider::class;
