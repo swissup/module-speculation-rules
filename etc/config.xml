@@ -18,7 +18,8 @@
                     'search',
                     'catalogsearch',
                     'product_compare',
-                    'wishlist'
+                    'wishlist',
+                    '/logout'
                 ]}}
             ]
         },
