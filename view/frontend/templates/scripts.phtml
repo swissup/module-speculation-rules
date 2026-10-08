@@ -7,6 +7,10 @@
 
 $viewModel = $block->getData('viewModel');
 $speculationRules = $viewModel->getSpeculationRules();
+if ($speculationRules === '') {
+    return;
+}
+
 $nonce = $viewModel->getNonce();
 $nonce = empty($nonce) ? '' : "speculationScript.setAttribute('nonce', '{$nonce}');";
 
