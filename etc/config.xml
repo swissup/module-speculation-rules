@@ -13,13 +13,14 @@
                 { "not": {"selector_matches": [ ".action", ".skip-prerender"]}},
                 { "not": {"selector_matches": "[rel~=nofollow]"}},
                 { "not": {"href_matches": [
-                    "checkout",
-                    "customer",
-                    "search",
-                    "catalogsearch",
-                    "product_compare",
-                    "wishlist",
-                    "/logout"
+                    "/checkout*",
+                    "/customer*",
+                    "/search*",
+                    "/catalogsearch*",
+                    "/catalog/product_compare/*",
+                    "/wishlist*",
+                    "/sales/*",
+                    "/*logout*"
                 ]}}
             ]
         },
