@@ -35,7 +35,7 @@ class Config implements ArgumentInterface, ConfigInterface
         $this->scopeConfig = $scopeConfig;
         $this->rulesNormalizer = $rulesNormalizer;
         $className = \Magento\Csp\Helper\CspNonceProvider::class;
-        $this->cspNonceProvider = class_exists($className) ? $objectManager->create($className) : null;
+        $this->cspNonceProvider = class_exists($className) ? $objectManager->get($className) : null;
     }
 
     /**
