@@ -64,6 +64,9 @@ class DefaultExclusionsTest extends TestCase
             'store code order view'  => ['/de/sales/order/view/order_id/1/'],
             'subfolder account'      => ['/shop/customer/account/'],
             'subfolder and store'    => ['/shop/de/checkout/'],
+            'store switch'        => ['/stores/store/redirect/___store/de/___from_store/en/uenc/XX/'],
+            'store switch code'   => ['/de/stores/store/redirect/___store/fr/___from_store/de/uenc/XX/'],
+            'store switch target' => ['/stores/store/switch/'],
         ];
     }
 
@@ -93,6 +96,7 @@ class DefaultExclusionsTest extends TestCase
             'cms with a route name inside'   => ['/checkout-policy'],
             'category with a route name'     => ['/blog/customer-stories.html'],
             'product with a route name'      => ['/gear/bags/search-light.html'],
+            'cms with a route name' => ['/stores-near-you'],
         ];
     }
 
