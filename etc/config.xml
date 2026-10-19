@@ -27,6 +27,8 @@
                     "/*/wishlist/*",
                     "/sales/*",
                     "/*/sales/*",
+                    "/stores/*",
+                    "/*/stores/*",
                     "/*logout*"
                 ]}}
             ]
