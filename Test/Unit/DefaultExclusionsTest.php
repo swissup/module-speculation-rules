@@ -67,6 +67,9 @@ class DefaultExclusionsTest extends TestCase
             'store switch'        => ['/stores/store/redirect/___store/de/___from_store/en/uenc/XX/'],
             'store switch code'   => ['/de/stores/store/redirect/___store/fr/___from_store/de/uenc/XX/'],
             'store switch target' => ['/stores/store/switch/'],
+
+            'not you'            => ['/persistent/index/unsetCookie/'],
+            'not you store code' => ['/de/persistent/index/unsetCookie/'],
         ];
     }
 
@@ -97,6 +100,7 @@ class DefaultExclusionsTest extends TestCase
             'category with a route name'     => ['/blog/customer-stories.html'],
             'product with a route name'      => ['/gear/bags/search-light.html'],
             'cms with a route name' => ['/stores-near-you'],
+            'persistent in the product slug' => ['/brands/persistent-co.html'],
         ];
     }
 
