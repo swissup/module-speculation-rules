@@ -8,7 +8,9 @@ use PHPUnit\Framework\TestCase;
 /**
  * href_matches strings are URLPattern pathnames: they must start with "/" and
  * match the whole path, otherwise they are resolved against the current page
- * and only ever match one exact URL.
+ * and only ever match one exact URL. A store code or a subfolder base URL puts
+ * extra segments in front of the route, so every route needs a prefixed form
+ * next to the root-anchored one.
  */
 class DefaultExclusionsTest extends TestCase
 {
@@ -18,13 +20,14 @@ class DefaultExclusionsTest extends TestCase
         $rules = json_decode((string) $xml->default->swissup_speculationrules->main->rules);
         $this->assertNotNull($rules, 'Default rules must be valid JSON');
 
+        $patterns = [];
         foreach ($rules->prerender[0]->where->and as $condition) {
             if (isset($condition->not->href_matches)) {
-                return $condition->not->href_matches;
+                $patterns = array_merge($patterns, (array) $condition->not->href_matches);
             }
         }
 
-        return [];
+        return $patterns;
     }
 
     private function globMatches(string $pattern, string $path): bool
@@ -50,6 +53,17 @@ class DefaultExclusionsTest extends TestCase
             'compare add'       => ['/catalog/product_compare/add/'],
             'guest order view'  => ['/sales/guest/view/'],
             'reorder'           => ['/sales/order/reorder/order_id/1/'],
+
+            'store code logout'      => ['/de/customer/account/logout/'],
+            'store code account'     => ['/de/customer/account/'],
+            'store code cart'        => ['/de/checkout/cart/'],
+            'store code checkout'    => ['/de/checkout/'],
+            'store code search'      => ['/de/catalogsearch/result/'],
+            'store code wishlist'    => ['/de/wishlist/'],
+            'store code compare'     => ['/de/catalog/product_compare/add/'],
+            'store code order view'  => ['/de/sales/order/view/order_id/1/'],
+            'subfolder account'      => ['/shop/customer/account/'],
+            'subfolder and store'    => ['/shop/de/checkout/'],
         ];
     }
 
@@ -69,6 +83,16 @@ class DefaultExclusionsTest extends TestCase
             'category' => ['/women/tops-women.html'],
             'product'  => ['/joust-duffle-bag.html'],
             'cms'      => ['/about-us'],
+
+            'store code home'     => ['/de/'],
+            'store code category' => ['/de/women/tops-women.html'],
+            'store code product'  => ['/de/joust-duffle-bag.html'],
+            'subfolder product'   => ['/shop/de/joust-duffle-bag.html'],
+
+            'cms starting with a route name' => ['/customer-service'],
+            'cms with a route name inside'   => ['/checkout-policy'],
+            'category with a route name'     => ['/blog/customer-stories.html'],
+            'product with a route name'      => ['/gear/bags/search-light.html'],
         ];
     }
 
@@ -84,6 +108,18 @@ class DefaultExclusionsTest extends TestCase
     {
         foreach ($this->getExcludedPatterns() as $pattern) {
             $this->assertStringStartsWith('/', $pattern);
+        }
+    }
+
+    /**
+     * globMatches() models URLPattern with "*" as the only metacharacter. Named groups,
+     * optional groups and regexp groups are valid URLPattern syntax that it would get
+     * wrong, so the shipped patterns have to stay inside the subset it can represent.
+     */
+    public function testPatternsStayInsideTheModelledSyntax(): void
+    {
+        foreach ($this->getExcludedPatterns() as $pattern) {
+            $this->assertMatchesRegularExpression('#^[A-Za-z0-9._/*-]+$#', (string) $pattern);
         }
     }
 }

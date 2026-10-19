@@ -13,13 +13,20 @@
                 { "not": {"selector_matches": [ ".action", ".skip-prerender"]}},
                 { "not": {"selector_matches": "[rel~=nofollow]"}},
                 { "not": {"href_matches": [
-                    "/checkout*",
-                    "/customer*",
-                    "/search*",
-                    "/catalogsearch*",
+                    "/checkout/*",
+                    "/*/checkout/*",
+                    "/customer/*",
+                    "/*/customer/*",
+                    "/search/*",
+                    "/*/search/*",
+                    "/catalogsearch/*",
+                    "/*/catalogsearch/*",
                     "/catalog/product_compare/*",
-                    "/wishlist*",
+                    "/*/catalog/product_compare/*",
+                    "/wishlist/*",
+                    "/*/wishlist/*",
                     "/sales/*",
+                    "/*/sales/*",
                     "/*logout*"
                 ]}}
             ]
