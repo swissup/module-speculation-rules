@@ -80,6 +80,20 @@ class DefaultExclusionsTest extends TestCase
         }
     }
 
+    /**
+     * Without canRestore the "Use system value" checkbox is not rendered at Default scope
+     * (Magento\Config\Block\System\Config\Form::isCanRestoreToDefault), so a store that
+     * once saved the field can never adopt a new default shipped in etc/config.xml.
+     */
+    public function testStoredRulesCanBeRestoredToTheShippedDefault(): void
+    {
+        $xml = simplexml_load_file(__DIR__ . '/../../etc/adminhtml/system.xml');
+        $field = $xml->xpath('//section[@id="swissup_speculationrules"]//field[@id="rules"]');
+
+        $this->assertNotEmpty($field, 'The rules field must exist');
+        $this->assertSame('1', (string) $field[0]['canRestore']);
+    }
+
     public function testPatternsAreAbsolute(): void
     {
         foreach ($this->getExcludedPatterns() as $pattern) {
